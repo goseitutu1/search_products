@@ -16,7 +16,7 @@ class ProductController extends Controller
     // function uses eloquent query to fetch products
     public function getProducts($keyword){
         $products = Product::query()->where('name', 'like', '%' . $keyword . '%')
-            ->orWhere('code','like','%'. $keyword. '%')->get(['name','code','cost_price','quantity']);
+            ->orWhere('code','like','%'. $keyword. '%')->paginate(20,['name','code','cost_price','quantity']);
 
         return \GuzzleHttp\json_encode([
             'code' => 200,

@@ -84,9 +84,9 @@
                                             <!--end::Product Widget -->
                                         </div>
                                         @endforeach
-                                            {!! $products->links() !!}
                                     </div>
                                     <!--end::Row-->
+                                    {!! $products->links() !!}
                                 </div>
                                 <!--end::Content-->
                             </div>
@@ -126,12 +126,12 @@
                 let product_menu = ``, productNameAndCode;
 
                 // if response.products array is empty
-                if(response.products.length === 0){
+                if(response.products.data.length === 0){
                     product_menu += `<h2 class="col-xl-6">Product was not found</h2>`
                 }
                 else {
                     // loops through the product obj array
-                    for(var product of response.products){
+                    for(var product of response.products.data){
                         productNameAndCode = product.name + ` - `+ product.code;
 
                         product_menu += `<div class="col-xl-2">
