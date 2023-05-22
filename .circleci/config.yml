@@ -3,15 +3,22 @@ version: 2.1
 workflows:
   test-deploy:
     jobs:
-      - test
+      - settings
+      - build
+         requires:
+          - settings
 
 jobs:
-  test:
+  settings:
     docker:
       - image: cimg/php:8.2.6
     steps:
       - checkout
       - run: php --version
+  build:
+    docker:
+      - image: cimg/php:8.2.6
+    steps:
       - run: composer install
       - run: php artisan optimize:clear
       - run: php artisan test
