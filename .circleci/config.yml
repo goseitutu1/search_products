@@ -7,7 +7,6 @@ workflows:
       - build:
           requires:
             - settings
-
 jobs:
   settings:
     docker:
