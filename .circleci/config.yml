@@ -5,9 +5,8 @@ workflows:
     jobs:
       - settings
       - build:
-        requires:
-          - settings
-
+          requires:
+            - settings
 jobs:
   settings:
     docker:
@@ -15,6 +14,7 @@ jobs:
     steps:
       - checkout
       - run: php --version
+
   build:
     docker:
       - image: cimg/php:8.2.6
