@@ -5,8 +5,8 @@ workflows:
     jobs:
       - settings
       - build:
-        requires:
-          - settings
+          requires:
+            - settings
 
 jobs:
   settings:
