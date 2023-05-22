@@ -12,3 +12,4 @@ jobs:
     steps:
       - checkout
       - run: php --version
+      - run: composer install
