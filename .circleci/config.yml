@@ -1,11 +1,11 @@
 version: 2.1
 
 workflows:
-  test-deploy:
+  test-deploy-two-jobs:
     jobs:
       - settings
-      - build
-         requires:
+      - build:
+        requires:
           - settings
 
 jobs:
