@@ -1,12 +1,25 @@
 version: 2.1
 
+# workflows:
+#   test-deploy-two-jobs:
+#     jobs:
+#       - build
+
 workflows:
-  test-deploy-two-jobs:
+  version: 2
+  rms-backend-build-and-deploy:
     jobs:
-      - settings
       - build:
-          requires:
-            - settings
+          filters:
+            branches:
+              only:
+                - goseitutu1
+      - build:
+          filters:
+            branches:
+              only:
+                - main
+
 jobs:
   settings:
     docker:
@@ -20,5 +33,31 @@ jobs:
     docker:
       - image: cimg/php:8.2.6
     steps:
-      - run: php artisan optimize:clear
-      - run: php artisan test
+      - checkout
+      
+      # Install dependencies
+      - run:
+          name: Install dependencies
+          command: |
+            composer install --no-dev
+
+      # Build and deploy to dev environment
+      - run:
+          name: Build and deploy to dev environment
+          command: |
+            php artisan migrate
+            php artisan test
+            php artisan optimize:clear
+
+            # We can add the command to run a seeder class if we create any
+
+
+      # Build and deploy to master environment
+      - run:
+          name: Build and deploy to master environment
+          command: |
+            php artisan migrate
+            php artisan test
+            php artisan optimize:clear
+
+            # We can add the command to run a seeder class if we create any
