@@ -7,7 +7,7 @@ version: 2.1
 
 workflows:
   version: 2
-  rms-backend-build-and-deploy-2:
+  rms-backend-build-and-deploy-3:
     jobs:
       - build:
           filters:
@@ -45,7 +45,7 @@ jobs:
       - run:
           name: Build and deploy to dev environment
           command: |
-            vendor/bin/phpunit
+            php artisan optimize:clear
 
             # We can add the command to run a seeder class if we create any
 
@@ -54,6 +54,6 @@ jobs:
       - run:
           name: Build and deploy to master environment
           command: |
-            vendor/bin/phpunit
+            php artisan optimize:clear
 
             # We can add the command to run a seeder class if we create any
